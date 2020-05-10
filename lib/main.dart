@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wherearethebarsat/screens/bar_list_screen.dart';
 import 'package:wherearethebarsat/screens/loading_screen.dart';
 
 void main() => runApp(MyApp());

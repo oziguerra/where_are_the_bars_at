@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wherearethebarsat/widgets/bars_data_model.dart';
 
 class BarListScreen extends StatefulWidget {
   final barList;
@@ -17,12 +18,11 @@ class _BarListScreenState extends State<BarListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white70,
+      backgroundColor: Colors.white54,
       body: ListView.builder(
           itemBuilder: (context, index) {
-            return Card(
-              child: Text(widget.barList['results'][index]['name']),
-            );
+            return BarsDataModel(
+                name: widget.barList['results'][index]['name']);
           },
           itemCount: widget.barList['results'].length),
     );
