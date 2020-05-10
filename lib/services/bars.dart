@@ -21,8 +21,8 @@ class BarsModel {
 //        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=$apiKey&inputtype=textquery&location=$latitude,$longitude&radius=5000&keyword=bar&type=$type';
     NetworkHelper networkHelper = new NetworkHelper(googleMapsURL);
 
-    var weatherData = await networkHelper.getData();
+    var barData = await networkHelper.getData();
 
-    return weatherData;
+    return barData;
   }
 }
