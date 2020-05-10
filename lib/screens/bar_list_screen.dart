@@ -22,7 +22,12 @@ class _BarListScreenState extends State<BarListScreen> {
       body: ListView.builder(
           itemBuilder: (context, index) {
             return BarsDataModel(
-                name: widget.barList['results'][index]['name']);
+              name: widget.barList['results'][index]['name'],
+              photoReference: widget.barList['results'][index]['photos'] != null
+                  ? widget.barList['results'][index]['photos'][0]
+                      ['photo_reference']
+                  : null,
+            );
           },
           itemCount: widget.barList['results'].length),
     );

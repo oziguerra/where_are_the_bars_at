@@ -16,6 +16,8 @@ class BarsModel {
     //Using rank by distance
     String googleMapsURL =
         "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=$apiKey&inputtype=textquery&location=$latitude,$longitude&rankby=distance&type=bar";
+
+    print(googleMapsURL);
     //Using radius
 //    String googleMapsURL =
 //        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=$apiKey&inputtype=textquery&location=$latitude,$longitude&radius=5000&keyword=bar&type=$type';
@@ -25,4 +27,6 @@ class BarsModel {
 
     return barData;
   }
+
+  Future<dynamic> getPlacePhoto() {}
 }
