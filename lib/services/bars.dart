@@ -1,7 +1,7 @@
 import 'networking.dart';
 import 'location.dart';
+import 'package:wherearethebarsat/constants.dart';
 
-const apiKey = 'AIzaSyAHgO-0h3YfsuB7qvNM_3NG8x44f2vW2uA';
 const type = 'bar';
 
 class BarsModel {
@@ -12,8 +12,13 @@ class BarsModel {
     await location.getCurrentLocation();
     latitude = location.latitude;
     longitude = location.longitude;
+
+    //Using rank by distance
     String googleMapsURL =
-        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=$apiKey&inputtype=textquery&location=$latitude,$longitude&radius=5000&keyword=bar&type=$type';
+        "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=$apiKey&inputtype=textquery&location=$latitude,$longitude&rankby=distance&type=bar";
+    //Using radius
+//    String googleMapsURL =
+//        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=$apiKey&inputtype=textquery&location=$latitude,$longitude&radius=5000&keyword=bar&type=$type';
     NetworkHelper networkHelper = new NetworkHelper(googleMapsURL);
 
     var weatherData = await networkHelper.getData();
