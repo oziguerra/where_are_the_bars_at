@@ -4,6 +4,7 @@ import 'package:wherearethebarsat/constants.dart';
 
 const type = 'bar';
 
+
 class BarsModel {
   Future<dynamic> getLocationBars() async {
     Location location = Location();

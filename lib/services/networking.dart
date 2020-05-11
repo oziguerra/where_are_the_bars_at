@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+/*
+ * Class to take care of the http requests and send back the data gathered
+ */
 class NetworkHelper {
   final String url;
 

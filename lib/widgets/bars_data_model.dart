@@ -11,11 +11,16 @@ class BarsDataModel extends StatelessWidget {
   //TODO: add following variables
   final String photoReference;
   final String placeID;
-  //final String rating;
-  //final String userRatings;
+  var rating;
+  var numberOfReviews;
   //final String address;
 
-  BarsDataModel({this.name, this.photoReference, this.placeID});
+  BarsDataModel(
+      {this.name,
+      this.photoReference,
+      this.placeID,
+      this.rating,
+      this.numberOfReviews});
 
   Future getBarData(String placeID) async {
     var barData = await BarsModel().getDataOfBar(placeID);
@@ -42,7 +47,7 @@ class BarsDataModel extends StatelessWidget {
     );
 
     print('Distance: ${gcd.haversineDistance()}');
-    return gcd.haversineDistance().toString();
+    return gcd.haversineDistance().toStringAsFixed(0);
   }
 
   @override
@@ -74,6 +79,7 @@ class BarsDataModel extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
                     name,
@@ -83,8 +89,10 @@ class BarsDataModel extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 20.0,
+                    height: 40.0,
                   ),
+                  Text('Rating: $rating/5'),
+                  Text('Number of reviews: $numberOfReviews'),
                   FutureBuilder<String>(
                     future: calculateDistance(), // a Future<String> or null
                     builder:
@@ -97,7 +105,8 @@ class BarsDataModel extends StatelessWidget {
                           if (snapshot.hasError)
                             return new Text('Error: ${snapshot.error}');
                           else
-                            return new Text('Result: ${snapshot.data}');
+                            return new Text(
+                                'Distance: ${snapshot.data} metres');
                       }
                     },
                   )
