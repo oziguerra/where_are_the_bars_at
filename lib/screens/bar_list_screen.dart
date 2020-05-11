@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:wherearethebarsat/constants.dart';
+import 'package:wherearethebarsat/services/bars.dart';
 import 'package:wherearethebarsat/widgets/bars_data_model.dart';
+import 'package:wherearethebarsat/services/networking.dart';
 
 class BarListScreen extends StatefulWidget {
   final barList;
@@ -10,6 +13,9 @@ class BarListScreen extends StatefulWidget {
 }
 
 class _BarListScreenState extends State<BarListScreen> {
+  double latitude;
+  double longitude;
+
   @override
   void initState() {
     super.initState();
@@ -26,7 +32,8 @@ class _BarListScreenState extends State<BarListScreen> {
               photoReference: widget.barList['results'][index]['photos'] != null
                   ? widget.barList['results'][index]['photos'][0]
                       ['photo_reference']
-                  : null,
+                  : 'none',
+              placeID: widget.barList['results'][index]['place_id'],
             );
           },
           itemCount: widget.barList['results'].length),

@@ -1,27 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:wherearethebarsat/constants.dart';
+import 'package:great_circle_distance2/great_circle_distance2.dart';
+import 'package:wherearethebarsat/services/bars.dart';
+import 'package:wherearethebarsat/services/location.dart';
 
 class BarsDataModel extends StatelessWidget {
   final String name;
-  final int maxImageWidth = 100;
+  final int maxImageWidth = 150;
 
   //TODO: add following variables
   final String photoReference;
+  final String placeID;
   //final String rating;
   //final String userRatings;
   //final String address;
 
-  BarsDataModel({this.name, this.photoReference});
+  BarsDataModel({this.name, this.photoReference, this.placeID});
+
+  Future getBarData(String placeID) async {
+    var barData = await BarsModel().getDataOfBar(placeID);
+    return barData;
+  }
+
+  Future<String> calculateDistance() async {
+    print('Place ID on datamodel: $placeID');
+    final barData = await getBarData(placeID);
+
+    final lat = barData['result']['geometry']['location']['lat'];
+    final long = barData['result']['geometry']['location']['lng'];
+    Location location = Location();
+    await location.getCurrentLocation();
+    print(location.latitude);
+    print(location.longitude);
+    print(lat);
+    print(long);
+    final gcd = GreatCircleDistance.fromDegrees(
+      latitude1: location.latitude,
+      longitude1: location.longitude,
+      latitude2: lat,
+      longitude2: long,
+    );
+
+    print('Distance: ${gcd.haversineDistance()}');
+    return gcd.haversineDistance().toString();
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         print('$name card pressed');
+        //print('Lat: $lat Long: $long');
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 5.0, vertical: 2.0),
-        padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 20.0),
+        padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 15.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
           color: Colors.white,
@@ -32,22 +65,44 @@ class BarsDataModel extends StatelessWidget {
           children: <Widget>[
             Container(
 //              color: Colors.green,
-//              margin: EdgeInsets.symmetric(horizontal: 5.0),
+              margin: EdgeInsets.symmetric(horizontal: 8.0),
 //              height: 100.0,
 //              width: 100.0,
               child: Image.network(
-                  'https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&key=$apiKey&photoreference=$photoReference'),
+                  'https://maps.googleapis.com/maps/api/place/photo?maxwidth=$maxImageWidth&key=$apiKey&photoreference=$photoReference'),
             ),
-            Column(
-              children: <Widget>[
-                Text(
-                  name,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    name,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  FutureBuilder<String>(
+                    future: calculateDistance(), // a Future<String> or null
+                    builder:
+                        (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      switch (snapshot.connectionState) {
+                        //case ConnectionState.none: return new Text('Press button to start');
+                        case ConnectionState.waiting:
+                          return new Text('Calculating distance...');
+                        default:
+                          if (snapshot.hasError)
+                            return new Text('Error: ${snapshot.error}');
+                          else
+                            return new Text('Result: ${snapshot.data}');
+                      }
+                    },
+                  )
+                ],
+              ),
             ),
           ],
         ),

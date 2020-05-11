@@ -28,5 +28,15 @@ class BarsModel {
     return barData;
   }
 
-  Future<dynamic> getPlacePhoto() {}
+  Future<dynamic> getDataOfBar(String placeID) async {
+    //Using rank by distance
+    print('Place ID: $placeID');
+    String googlePlaceURL =
+        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeID&fields=name,geometry,rating,formatted_phone_number&key=$apiKey';
+    NetworkHelper networkHelper = new NetworkHelper(googlePlaceURL);
+
+    var barData = await networkHelper.getData();
+
+    return barData;
+  }
 }
