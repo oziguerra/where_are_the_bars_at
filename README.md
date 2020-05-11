@@ -8,7 +8,7 @@ Created this project as a personal two day hackathon for my application to a com
 
 ## Current Functionality
 
-- Load list of the 20 closest bars
+- Load list of the 20 closest bars using google maps API
 - Calculate the distance from your location to each of the bars
 - Display the list of bars in a list view
 - Retrieve an image of the bars to display along with the name and other data on a list tile
