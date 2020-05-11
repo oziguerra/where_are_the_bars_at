@@ -14,3 +14,6 @@ Created this project as a personal two day hackathon for my application to a com
 - Display the list of bars in a list view, from retrieved JSON data from the google maps API
 - Retrieve an image of the bars to display along with the name and other data on a list tile
 - "Pull to refresh" Using Liquid Pull To Refresh API
+
+
+My website: [www.oziguerra.com](https://oziguerra.com)
