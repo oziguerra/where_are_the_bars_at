@@ -4,8 +4,11 @@ import 'package:wherearethebarsat/constants.dart';
 
 const type = 'bar';
 
-
+/*
+ * Class used to retrieve data for closest bars and each bar
+ */
 class BarsModel {
+  //Gets the list of closest bars
   Future<dynamic> getLocationBars() async {
     Location location = Location();
     double latitude;
@@ -29,6 +32,7 @@ class BarsModel {
     return barData;
   }
 
+  //Gets the information of a specific place (in this case a specific bar)
   Future<dynamic> getDataOfBar(String placeID) async {
     //Using rank by distance
     print('Place ID: $placeID');

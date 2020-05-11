@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wherearethebarsat/constants.dart';
 import 'package:great_circle_distance2/great_circle_distance2.dart';
-import 'package:wherearethebarsat/services/bars.dart';
+import 'package:wherearethebarsat/services/data_retriever.dart';
 import 'package:wherearethebarsat/services/location.dart';
 
 class BarsDataModel extends StatelessWidget {
@@ -11,16 +11,17 @@ class BarsDataModel extends StatelessWidget {
   //TODO: add following variables
   final String photoReference;
   final String placeID;
-  var rating;
-  var numberOfReviews;
+  final rating;
+  final numberOfReviews;
   //final String address;
 
-  BarsDataModel(
-      {this.name,
-      this.photoReference,
-      this.placeID,
-      this.rating,
-      this.numberOfReviews});
+  BarsDataModel({
+    this.name,
+    this.photoReference,
+    this.placeID,
+    this.rating,
+    this.numberOfReviews,
+  });
 
   Future getBarData(String placeID) async {
     var barData = await BarsModel().getDataOfBar(placeID);
