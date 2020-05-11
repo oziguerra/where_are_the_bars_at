@@ -15,7 +15,9 @@ Created this project as a personal two day hackathon for my application to a com
 - Retrieve an image of the bars to display along with the name and other data on a list tile
 - "Pull to refresh" Using Liquid Pull To Refresh API
 
-![app_gif](betterpulltorefresh.gif | =100x20)
-![app_screenshot](Screenshot_app.png | =100x20)
+## Screenshots
+
+<img src="betterpulltorefresh.gif" height="500"> <nobr>
+<img src="Screenshot_app.png" height="500">
 
 #### My website: [www.oziguerra.com](https://oziguerra.com)
