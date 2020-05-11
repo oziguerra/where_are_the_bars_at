@@ -1,16 +1,14 @@
-# wherearethebarsat
+# where are the bars at?
 
-A new Flutter application to find the nearest bars
+A Flutter application to find the nearest bars to your location
 
-## Getting Started
+## Description
 
-This project is a starting point for a Flutter application.
+Created this project as a personal two day hackathon for my application to a company, might continue to develop this further.
 
-A few resources to get you started if this is your first Flutter project:
+## Current Functionality
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Load list of the 20 closest bars
+- Calculate the distance from your location to each of the bars
+- Display the list of bars in a list view
+- Retrieve an image of the bars to display along with the name and other data on a list tile
